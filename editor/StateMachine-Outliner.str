@@ -1,0 +1,11 @@
+module editor/StateMachine-Outliner
+
+imports
+  include/StateMachine
+  lib/runtime/editor/outline-library
+  lib/runtime/editor/origins
+  editor/StateMachine-Outliner.generated
+
+rules
+  
+  outline-expand-to-level = !3

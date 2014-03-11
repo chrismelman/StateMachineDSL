@@ -1,0 +1,62 @@
+module StateMachine.pp.generated
+
+strategies
+  prettyprint-Start :
+    Module(a, b) -> [ H(
+                        [SOpt(HS(), "0")]
+                      , [S("module "), a0]
+                      )
+                    , H(
+                        []
+                      , [S("")]
+                      )
+                    , H(
+                        [SOpt(HS(), "0")]
+                      , [b0]
+                      )
+                    ]
+    where a0 := <pp-one-Z(prettyprint-ID)> a
+    where b0 := <pp-V-list(prettyprint-Definition|"1")> b
+
+  prettyprint-Definition :
+    Entity(a, b) -> [ H(
+                        [SOpt(HS(), "0")]
+                      , [S("entity "), a1, S(" {")]
+                      )
+                    , b1
+                    , H(
+                        [SOpt(HS(), "0")]
+                      , [S("}")]
+                      )
+                    ]
+    where a1 := <pp-one-Z(prettyprint-ID)> a
+    where b1 := <pp-indent(|"2")> [<pp-V-list(prettyprint-Property)> b]
+
+  prettyprint-Property :
+    Property(a, b) -> [ H(
+                          [SOpt(HS(), "0")]
+                        , [a2, S(" : "), b2]
+                        )
+                      ]
+    where a2 := <pp-one-Z(prettyprint-ID)> a
+    where b2 := <pp-one-Z(prettyprint-Type)> b
+
+  prettyprint-Type :
+    Type(a) -> [ H(
+                   [SOpt(HS(), "0")]
+                 , [a3]
+                 )
+               ]
+    where a3 := <pp-one-Z(prettyprint-ID)> a
+
+  prettyprint-example =
+    prettyprint-Start
+
+  prettyprint-example =
+    prettyprint-Definition
+
+  prettyprint-example =
+    prettyprint-Property
+
+  prettyprint-example =
+    prettyprint-Type

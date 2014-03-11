@@ -1,0 +1,29 @@
+module StateMachine.main
+
+imports
+  StateMachine-Menus
+  StateMachine-Refactorings
+  StateMachine-Colorer
+  StateMachine-Completions
+  StateMachine-Folding
+  StateMachine-References
+  StateMachine-Syntax
+
+language General properties
+  
+  name:    StateMachine
+  id:  StateMachine
+  extends: Root
+  
+  description: "Spoofax-generated editor for the StateMachine language"
+  url: http://strategoxt.org
+  
+  extensions: stm
+  table:  include/StateMachine.tbl
+  start symbols: Start
+  
+  provider: include/statemachine.ctree
+  provider: include/statemachine-java.jar
+  observer: editor-analyze (multifile)
+  
+  on save : editor-save

@@ -6,7 +6,7 @@ module StateMachine
 imports 
 
 	Common
-
+ 
 context-free start-symbols
 
 	Start
@@ -16,16 +16,18 @@ templates
 	Start.Module = <
 		module <ID> 
 		
-		<Definition*; separator="\n\n">
+		<Definition*; separator="\n">
 	>
 
-	Definition.Entity = <
-		entity <ID> {
-			<Property*; separator="\n">
-		}
+	Definition.Input = <
+		Input <SINGLEKEY>
 	>
   	
-	Property.Property = <<ID> : <Type>>
+	Definition.State =<
+	State <ID> {
+		<StateChange*; separator="\n">
+	}
+	>
 	
-	Type.Type = <<ID>>
+	StateChange.StateChange = <on <SINGLEKEY> goto <ID> >
 

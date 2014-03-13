@@ -3,6 +3,8 @@ module Common
 lexical syntax
 
 	[a-zA-Z][a-zA-Z0-9]* -> ID
+	[a-zA-Z0-9] -> SINGLEKEY
+
 	"-"? [0-9]+          -> INT
 	
 	"\"" StringChar* "\"" -> STRING
@@ -10,14 +12,14 @@ lexical syntax
 	"\\\""                -> StringChar
 	BackSlashChar         -> StringChar
 	"\\"                  -> BackSlashChar
-	
+	 
 	[\ \t\n\r] -> LAYOUT
 	
 	[\*]                             -> CommentChar
 	"/*" (~[\*] | CommentChar)* "*/" -> LAYOUT
 	"//" ~[\n\r]* ([\n\r] | EOF)     -> LAYOUT
 	
-	-> EOF
+	-> EOF 
 
 lexical restrictions
 

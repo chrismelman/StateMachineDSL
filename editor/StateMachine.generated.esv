@@ -3,7 +3,9 @@ module StateMachine.generated
 completions
   completion template Start : "module ID " =
     "module " <ID:ID> "\n\n" (cursor) (blank)  
-  completion template Definition : "entity ID { }" =
-    "entity " <ID:ID> " {\n\t" (cursor) "\n}" (blank)  
-  completion template Property : "ID : Type" =
-    <ID:ID> " : " <Type:Type>  
+  completion template Definition : "Input SINGLEKEY" =
+    "Input " <SINGLEKEY:SINGLEKEY> (blank)  
+  completion template Definition : "State ID { }" =
+    "State " <ID:ID> " {\n\t" (cursor) "\n}" (blank)  
+  completion template StateChange : "on SINGLEKEY goto ID " =
+    "on " <SINGLEKEY:SINGLEKEY> " goto " <ID:ID> " "  

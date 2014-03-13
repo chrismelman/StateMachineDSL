@@ -1,0 +1,44 @@
+[ [ Line(
+      [ Layout("")
+      , String("module")
+      , Layout(" ")
+      , Placeholder(None(), sort("ID"{Use(Result(126))}), None(), [Text("ID")])
+      ]
+    )
+  , Line([Layout("")])
+  , Line(
+      [ Layout("")
+      , Placeholder(None(), sort("Definition"{Use(Result(129))}), Star(), [Separator("\n\n")])
+      ]
+    )
+  ]
+, [ Line(
+      [ Layout("")
+      , String("entity")
+      , Layout(" ")
+      , Placeholder(None(), sort("ID"{Use(Result(126))}), None(), [Text("ID")])
+      , Layout(" ")
+      , String("{")
+      ]
+    )
+  , Line(
+      [ Layout("  ")
+      , Placeholder(None(), sort("Property"{Use(Result(134))}), Star(), [Separator("\n")])
+      ]
+    )
+  , Line([Layout(""), String("}")])
+  ]
+, [ Line(
+      [ Placeholder(None(), sort("ID"{Use(Result(126))}), None(), [Text("ID")])
+      , Layout(" ")
+      , String(":")
+      , Layout(" ")
+      , Placeholder(None(), sort("Type"{Use(Result(139))}), None(), [Text("Type")])
+      ]
+    )
+  ]{0}
+, [ Line(
+      [Placeholder(None(), sort("ID"{Use(Result(126))}), None(), [Text("ID")])]
+    )
+  ]{0}
+]

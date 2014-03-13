@@ -2,7 +2,10 @@ module example
 
 State x {
 	on x goto x
+	on y goto x
+	
 }
 
 Input x
 Input y
+

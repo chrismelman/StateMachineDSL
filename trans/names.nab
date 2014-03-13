@@ -5,27 +5,28 @@ imports
 	include/StateMachine
 	
 namespaces
-	
 	Module
-	Entity
-	Property
+	State
+	Input
+	GotoRule
 	
 binding rules
 
 	Module(x, _) : 
-		defines Module x
-		scopes Entity
-		implicitly defines Entity "String"
-		implicitly defines Entity "Int"
-		
-	Entity(x, _) :
-		defines Entity x 
-			of type Type(x)
-		scopes Property
-		
-	Property(x, t) :
-		defines Property x 
-			of type t
-		
-	Type(x) :
-		refers to Entity x
+		defines unique Module x
+		scopes State, Input
+
+    State(name, _) :
+    	defines unique State name
+    	scopes GotoRule
+    	
+    Input(key) :
+    	defines unique Input key
+    	
+    StateChange(key,state) :
+    	defines unique GotoRule key
+    	refers to State state
+    	refers to Input key
+    	
+     	
+

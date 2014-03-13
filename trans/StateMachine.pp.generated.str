@@ -4,7 +4,7 @@ strategies
   prettyprint-Start :
     Module(a, b) -> [ H(
                         [SOpt(HS(), "0")]
-                      , [S("module "), a0]
+                      , [S("module "), a16]
                       )
                     , H(
                         []
@@ -12,42 +12,47 @@ strategies
                       )
                     , H(
                         [SOpt(HS(), "0")]
-                      , [b0]
+                      , [b12]
                       )
                     ]
-    where a0 := <pp-one-Z(prettyprint-ID)> a
-    where b0 := <pp-V-list(prettyprint-Definition|"1")> b
+    where a16 := <pp-one-Z(prettyprint-ID)> a
+    where b12 := <pp-V-list(prettyprint-Definition)> b
 
   prettyprint-Definition :
-    Entity(a, b) -> [ H(
-                        [SOpt(HS(), "0")]
-                      , [S("entity "), a1, S(" {")]
-                      )
-                    , b1
-                    , H(
-                        [SOpt(HS(), "0")]
-                      , [S("}")]
-                      )
-                    ]
-    where a1 := <pp-one-Z(prettyprint-ID)> a
-    where b1 := <pp-indent(|"2")> [<pp-V-list(prettyprint-Property)> b]
+    Input(a) -> [ H(
+                    [SOpt(HS(), "0")]
+                  , [S("Input "), a17]
+                  )
+                ]
+    where a17 := <pp-one-Z(prettyprint-SINGLEKEY)> a
 
-  prettyprint-Property :
-    Property(a, b) -> [ H(
-                          [SOpt(HS(), "0")]
-                        , [a2, S(" : "), b2]
-                        )
-                      ]
-    where a2 := <pp-one-Z(prettyprint-ID)> a
-    where b2 := <pp-one-Z(prettyprint-Type)> b
+  prettyprint-Definition :
+    State(a, b) -> [ H(
+                       [SOpt(HS(), "0")]
+                     , [S("State "), a18, S(" {")]
+                     )
+                   , b13
+                   , H(
+                       [SOpt(HS(), "0")]
+                     , [S("}")]
+                     )
+                   ]
+    where a18 := <pp-one-Z(prettyprint-ID)> a
+    where b13 := <pp-indent(|"2")> [<pp-V-list(prettyprint-StateChange)> b]
 
-  prettyprint-Type :
-    Type(a) -> [ H(
-                   [SOpt(HS(), "0")]
-                 , [a3]
-                 )
-               ]
-    where a3 := <pp-one-Z(prettyprint-ID)> a
+  prettyprint-StateChange :
+    StateChange(a, b) -> [ H(
+                             [SOpt(HS(), "0")]
+                           , [ S("on ")
+                             , a19
+                             , S(" goto ")
+                             , b14
+                             , S(" ")
+                             ]
+                           )
+                         ]
+    where a19 := <pp-one-Z(prettyprint-SINGLEKEY)> a
+    where b14 := <pp-one-Z(prettyprint-ID)> b
 
   prettyprint-example =
     prettyprint-Start
@@ -56,7 +61,4 @@ strategies
     prettyprint-Definition
 
   prettyprint-example =
-    prettyprint-Property
-
-  prettyprint-example =
-    prettyprint-Type
+    prettyprint-StateChange

@@ -4,6 +4,9 @@ strategies
   prettyprint-ID =
     ![S(<is-string>)]
 
+  prettyprint-SINGLEKEY =
+    ![S(<is-string>)]
+
   prettyprint-INT =
     ![S(<is-string>)]
 
@@ -24,6 +27,9 @@ strategies
 
   prettyprint-example =
     prettyprint-ID
+
+  prettyprint-example =
+    prettyprint-SINGLEKEY
 
   prettyprint-example =
     prettyprint-INT

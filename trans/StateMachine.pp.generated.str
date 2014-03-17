@@ -2,60 +2,72 @@ module StateMachine.pp.generated
 
 strategies
   prettyprint-Start :
-    Module(a, b) -> [ H(
-                        [SOpt(HS(), "0")]
-                      , [S("module "), a16]
-                      )
-                    , H(
-                        []
-                      , [S("")]
-                      )
-                    , H(
-                        [SOpt(HS(), "0")]
-                      , [b12]
-                      )
-                    ]
-    where a16 := <pp-one-Z(prettyprint-ID)> a
-    where b12 := <pp-V-list(prettyprint-Definition)> b
+    Module(a, b, c) -> [ H(
+                           [SOpt(HS(), "0")]
+                         , [S("Module "), a5]
+                         )
+                       , H(
+                           [SOpt(HS(), "0")]
+                         , [b3]
+                         )
+                       , H(
+                           [SOpt(HS(), "0")]
+                         , [c1]
+                         )
+                       ]
+    where a5 := <pp-one-Z(prettyprint-ID)> a
+    where b3 := <pp-V-list(prettyprint-Import)> b
+    where c1 := <pp-V-list(prettyprint-Definition)> c
+
+  prettyprint-Import :
+    Import(a) -> [ H(
+                     [SOpt(HS(), "0")]
+                   , [S("Import "), a6]
+                   )
+                 ]
+    where a6 := <pp-one-Z(prettyprint-ID)> a
 
   prettyprint-Definition :
     Input(a) -> [ H(
                     [SOpt(HS(), "0")]
-                  , [S("Input "), a17]
+                  , [S("Input "), a7]
                   )
                 ]
-    where a17 := <pp-one-Z(prettyprint-SINGLEKEY)> a
+    where a7 := <pp-one-Z(prettyprint-SINGLEKEY)> a
 
   prettyprint-Definition :
     State(a, b) -> [ H(
                        [SOpt(HS(), "0")]
-                     , [S("State "), a18, S(" {")]
+                     , [S("State "), a8, S(" {")]
                      )
-                   , b13
+                   , b4
                    , H(
                        [SOpt(HS(), "0")]
                      , [S("}")]
                      )
                    ]
-    where a18 := <pp-one-Z(prettyprint-ID)> a
-    where b13 := <pp-indent(|"2")> [<pp-V-list(prettyprint-StateChange)> b]
+    where a8 := <pp-one-Z(prettyprint-ID)> a
+    where b4 := <pp-indent(|"2")> [<pp-V-list(prettyprint-StateChange)> b]
 
   prettyprint-StateChange :
     StateChange(a, b) -> [ H(
                              [SOpt(HS(), "0")]
                            , [ S("on ")
-                             , a19
+                             , a9
                              , S(" goto ")
-                             , b14
+                             , b5
                              , S(" ")
                              ]
                            )
                          ]
-    where a19 := <pp-one-Z(prettyprint-SINGLEKEY)> a
-    where b14 := <pp-one-Z(prettyprint-ID)> b
+    where a9 := <pp-one-Z(prettyprint-SINGLEKEY)> a
+    where b5 := <pp-one-Z(prettyprint-ID)> b
 
   prettyprint-example =
     prettyprint-Start
+
+  prettyprint-example =
+    prettyprint-Import
 
   prettyprint-example =
     prettyprint-Definition

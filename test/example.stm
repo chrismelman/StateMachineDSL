@@ -1,4 +1,4 @@
-module example
+Module example
 
 State x {
 	on x goto x

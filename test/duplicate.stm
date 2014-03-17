@@ -1,0 +1,12 @@
+module duplicate
+
+Input x
+Input x
+
+State y {
+	
+}
+
+State y {
+	
+}

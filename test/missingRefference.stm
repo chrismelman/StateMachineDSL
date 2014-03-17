@@ -1,0 +1,8 @@
+module missingRefference
+
+Input x
+
+State y {
+	on z goto y
+	on x goto d
+}

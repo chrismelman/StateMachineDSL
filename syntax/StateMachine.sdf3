@@ -14,9 +14,13 @@ context-free start-symbols
 templates
 
 	Start.Module = <
-		module <ID> 
-		
+		Module <ID> 
+		<Import*; separator="\n">
 		<Definition*; separator="\n">
+	>
+	
+	Import.Import = <
+		Import <ID>	
 	>
 
 	Definition.Input = <

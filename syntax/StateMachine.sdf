@@ -6,12 +6,14 @@ exports
     Start
 
   context-free syntax
-    "module" ID Definition*         -> Start       {cons("Module")}
+    "Module" ID Import* Definition* -> Start       {cons("Module")}
+    "Import" ID                     -> Import      {cons("Import")}
     "Input" SINGLEKEY               -> Definition  {cons("Input")}
     "State" ID "{" StateChange* "}" -> Definition  {cons("State")}
     "on" SINGLEKEY "goto" ID        -> StateChange {cons("StateChange")}
 
   context-free syntax
     CONTENTCOMPLETE -> Start       {cons("COMPLETION-Start")}
+    CONTENTCOMPLETE -> Import      {cons("COMPLETION-Import")}
     CONTENTCOMPLETE -> Definition  {cons("COMPLETION-Definition")}
     CONTENTCOMPLETE -> StateChange {cons("COMPLETION-StateChange")}

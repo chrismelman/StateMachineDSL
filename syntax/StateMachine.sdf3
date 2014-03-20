@@ -13,6 +13,12 @@ context-free start-symbols
 
 templates
 
+	Start.MainModule = <
+		MainModule <ID> 
+		<Import*; separator="\n">
+		<Definition*; separator="\n">
+	>
+
 	Start.Module = <
 		Module <ID> 
 		<Import*; separator="\n">

@@ -12,9 +12,13 @@ namespaces
 	
 binding rules
 
-	Module(x, _) : 
+	Module(x, _, _) : 
 		defines unique Module x
 		scopes State, Input
+		
+	MainModule(x, _, _) : 
+		defines unique Module x
+		scopes State, Input	
 
     State(name, _) :
     	defines unique State name

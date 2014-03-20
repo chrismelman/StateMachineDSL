@@ -1,6 +1,8 @@
 module StateMachine.generated
 
 completions
+  completion template Start : "MainModule ID " =
+    "MainModule " <ID:ID> "\n" (cursor) (blank)  
   completion template Start : "Module ID " =
     "Module " <ID:ID> "\n" (cursor) (blank)  
   completion template Import : "Import ID" =

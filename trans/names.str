@@ -11,17 +11,17 @@ imports
 rules
 
   nabl-get-scope =
-    ?Module(x, _)
+    ?Module(x, _, _)
     ; ![NablNsState(), NablNsInput()]
 
   nabl-get-name :
-    Module(x, _) -> x
+    Module(x, _, _) -> x
 
   nabl-name-apply(s) =
-    Module(s, id)
+    Module(s, id, id)
 
   nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
-    ?Module(x, _)
+    ?Module(x, _, _)
     ; origin-track-forced(
         Module(
           nabl-def(
@@ -38,6 +38,44 @@ rules
           , [NablNsState(), NablNsInput()]
           , []
           )
+        , id
+        , id
+        )
+      |
+      )
+    ; match(child-uris__|c-uri1__)
+    ; match(sibl-uris__|s-uri1__)
+    ; match(implicits__|[])
+
+  nabl-get-scope =
+    ?MainModule(x, _, _)
+    ; ![NablNsState(), NablNsInput()]
+
+  nabl-get-name :
+    MainModule(x, _, _) -> x
+
+  nabl-name-apply(s) =
+    MainModule(s, id, id)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?MainModule(x, _, _)
+    ; origin-track-forced(
+        MainModule(
+          nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsModule()
+          , Unique()
+          , Current()
+          , [NablNsState(), NablNsInput()]
+          , []
+          )
+        , id
         , id
         )
       |

@@ -220,6 +220,62 @@ rules
       |
       )
 
+  nabl-get-name :
+    Import(name) -> name
+
+  nabl-name-apply(s) =
+    Import(s)
+
+  nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?Import(name)
+    ; origin-track-forced(
+        Import(
+          nabl-use(
+          | lang__
+          , partition__
+          , uniques__
+          , uris__
+          , [ UseCandidate(
+                NablNsModule()
+              , []
+              , Current()
+              , True()
+              , []
+              )
+            ]
+          )
+        )
+      |
+      )
+
+  nabl-import-site(|lang__, partition__, uniques__, uris__, states__) =
+    ?Import(name)
+    ; origin-track-forced(
+        nabl-import(
+        | lang__
+        , partition__
+        , uniques__
+        , uris__
+        , [ Wildcard(
+              [ Import(lang__, NablNsState())
+              , Import(lang__, Imported(NablNsState()))
+              , Import(lang__, NablNsInput())
+              , Import(lang__, Imported(NablNsInput()))
+              ]
+            , Context(
+                NablNsModule()
+              , name
+              , []
+              , Current()
+              )
+            , Current()
+            , []
+            )
+          ]
+        )
+      |
+      )
+
 
 imports
   include/StateMachine

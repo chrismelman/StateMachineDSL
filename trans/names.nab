@@ -32,5 +32,11 @@ binding rules
     	refers to State state
     	refers to Input key
     	
+    Import(name) :
+    	imports 
+    	State, imported State,
+    	Input, imported Input
+    	from Module name
+    	 
      	
 

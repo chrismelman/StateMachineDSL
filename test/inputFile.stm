@@ -1,4 +1,9 @@
 Module inputFile
 
+Import refImport
 Input x
 Input y
+
+State test {
+	on z goto test
+}

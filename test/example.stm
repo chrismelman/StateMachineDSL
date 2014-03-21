@@ -1,9 +1,10 @@
 MainModule example
-Import inputFile
+Import inputFile 
 
 State x {
 	on x goto x
-	on y goto x
+	on z goto x
+	
 	
 }
 

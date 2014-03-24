@@ -11,5 +11,11 @@ completions
     "Input " <SINGLEKEY:SINGLEKEY> (blank)  
   completion template Definition : "State ID { }" =
     "State " <ID:ID> " {\n\t" (cursor) "\n}" (blank)  
+  completion template Definition : "Start State ID { }" =
+    "Start State " <ID:ID> " {\n\t" (cursor) "\n}" (blank)  
+  completion template Definition : "End State ID {}" =
+    "End State " <ID:ID> " {}" (blank)  
+  completion template Definition : "End State ID" =
+    "End State " <ID:ID> (blank)  
   completion template StateChange : "on SINGLEKEY goto ID " =
     "on " <SINGLEKEY:SINGLEKEY> " goto " <ID:ID> " "  

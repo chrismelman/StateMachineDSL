@@ -1,9 +1,15 @@
 module check
 
 imports
-
+	lib/runtime/nabl/-
+  	lib/runtime/task/-
+  	lib/runtime/properties/-
+  	lib/runtime/types/-
+  	lib/runtime/editor/-
 	include/StateMachine
 	lib/editor-common.generated
+	names
+
 
 rules
 	
@@ -16,3 +22,9 @@ rules
 		Module(x @ "example", _) -> (x, $[This is just an example program in the "entities" language 
 		                                  (this note is defined in trans/check.str)])
 
+	nabl-constraint(|ctx):
+	    StateChange(name, state) -> <fail>
+	    where
+	      ty := <type-lookup(|ctx)> state 
+	    ; m  := <type-match(|ctx, StartState())> ty
+	    ; <task-create-error-on-success(|ctx, m, $[cannot goto the start state: [name]])> state

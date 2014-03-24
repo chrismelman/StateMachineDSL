@@ -6,6 +6,15 @@ imports
   lib/runtime/properties/-
   lib/runtime/types/-
   lib/runtime/editor/-
+  include/StateMachine
+
+
+signature
+  constructors
+    NablNsModule   : Namespace
+    NablNsState    : Namespace
+    NablNsInput    : Namespace
+    NablNsGotoRule : Namespace
 
 
 rules
@@ -41,11 +50,11 @@ rules
         , id
         , id
         )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
       |
       )
-    ; match(child-uris__|c-uri1__)
-    ; match(sibl-uris__|s-uri1__)
-    ; match(implicits__|[])
 
   nabl-get-scope =
     ?MainModule(x, _, _)
@@ -78,11 +87,11 @@ rules
         , id
         , id
         )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
       |
       )
-    ; match(child-uris__|c-uri1__)
-    ; match(sibl-uris__|s-uri1__)
-    ; match(implicits__|[])
 
   nabl-get-scope =
     ?State(name, _)
@@ -114,11 +123,92 @@ rules
           )
         , id
         )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
       |
       )
-    ; match(child-uris__|c-uri1__)
-    ; match(sibl-uris__|s-uri1__)
-    ; match(implicits__|[])
+
+  nabl-get-scope =
+    ?StartState(name, _)
+    ; ![NablNsGotoRule()]
+
+  nabl-get-name :
+    StartState(name, _) -> name
+
+  nabl-name-apply(s) =
+    StartState(s, id)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?StartState(name, _)
+    ; origin-track-forced(
+        StartState(
+          nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsState()
+          , Unique()
+          , Current()
+          , [NablNsGotoRule()]
+          , []
+          )
+        , id
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
+
+  nabl-prop-site(|lang__, partition__, uris__, states__, implicits__) =
+    ?StartState(name, _)
+    ; origin-track-forced(
+        StartState(
+          nabl-store-props(
+          | partition__
+          , [ Prop(Type(), StartState(), [])
+            ]
+          )
+        , id
+        )
+      |
+      )
+
+  nabl-get-name :
+    EndState(name) -> name
+
+  nabl-name-apply(s) =
+    EndState(s)
+
+  nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
+    ?EndState(name)
+    ; origin-track-forced(
+        EndState(
+          nabl-def(
+            ?c-uri1__
+          , ?s-uri1__
+          | lang__
+          , partition__
+          , uniques__
+          , uri__
+          , uri__
+          , NablNsState()
+          , Unique()
+          , Current()
+          , []
+          , []
+          )
+        )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
+      |
+      )
 
   nabl-get-name :
     Input(key) -> key
@@ -145,11 +235,11 @@ rules
           , []
           )
         )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
       |
       )
-    ; match(child-uris__|c-uri1__)
-    ; match(sibl-uris__|s-uri1__)
-    ; match(implicits__|[])
 
   nabl-def-site(child-uris__, sibl-uris__, implicits__|lang__, partition__, uniques__, uri__, states__) =
     ?StateChange(key, state)
@@ -171,11 +261,11 @@ rules
           )
         , id
         )
+        ; match(child-uris__|c-uri1__)
+        ; match(sibl-uris__|s-uri1__)
+        ; match(implicits__|[])
       |
       )
-    ; match(child-uris__|c-uri1__)
-    ; match(sibl-uris__|s-uri1__)
-    ; match(implicits__|[])
 
   nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
     ?StateChange(key, state)
@@ -197,34 +287,25 @@ rules
             ]
           )
         )
-      |
-      )
-    ; origin-track-forced(
-        StateChange(
-          nabl-use(
-          | lang__
-          , partition__
-          , uniques__
-          , uris__
-          , [ UseCandidate(
-                NablNsInput()
-              , []
-              , Current()
-              , True()
-              , []
-              )
-            ]
+        ; StateChange(
+            nabl-use(
+            | lang__
+            , partition__
+            , uniques__
+            , uris__
+            , [ UseCandidate(
+                  NablNsInput()
+                , []
+                , Current()
+                , True()
+                , []
+                )
+              ]
+            )
+          , id
           )
-        , id
-        )
       |
       )
-
-  nabl-get-name :
-    Import(name) -> name
-
-  nabl-name-apply(s) =
-    Import(s)
 
   nabl-use-site(|lang__, partition__, uniques__, uris__, states__) =
     ?Import(name)
@@ -245,6 +326,22 @@ rules
             ]
           )
         )
+        ; Import(
+            nabl-use(
+            | lang__
+            , partition__
+            , uniques__
+            , uris__
+            , [ UseCandidate(
+                  NablNsModule()
+                , []
+                , Current()
+                , True()
+                , []
+                )
+              ]
+            )
+          )
       |
       )
 
@@ -275,15 +372,3 @@ rules
         )
       |
       )
-
-
-imports
-  include/StateMachine
-
-
-signature
-  constructors
-    NablNsModule   : Namespace
-    NablNsState    : Namespace
-    NablNsInput    : Namespace
-    NablNsGotoRule : Namespace

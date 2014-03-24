@@ -1,0 +1,7 @@
+MainModule notGotoStart
+
+Input x
+
+Start State s{
+	on x goto s
+}

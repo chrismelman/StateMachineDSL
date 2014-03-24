@@ -94,3 +94,6 @@ rules // Debugging
 	debug-reanalyze = 
 		analysis-debug-reanalyze(|<language>)
 
+signature constructors
+
+StartState : Type

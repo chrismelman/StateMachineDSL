@@ -3,10 +3,18 @@ Import inputFile
 
 State x {
 	on x goto x
+	on y goto x
 	on z goto x
-	
 	
 }
 
+
+Start State start {
+	on x goto x
+	on y goto error
+}
+
+End State error
+End State error2{}
 
 

@@ -18,22 +18,30 @@ binding rules
 		
 	MainModule(x, _, _) : 
 		defines unique Module x
-		scopes State, Input	
+		scopes State, Input
 
     State(name, _) :
     	defines unique State name
     	scopes GotoRule
     	
+	StartState(name, _) :
+		defines unique State name of type StartState()
+	    scopes GotoRule
+
+	EndState(name) :
+    	defines unique State name
+    	
     Input(key) :
     	defines unique Input key
     	
-    StateChange(key,state) :
+    StateChange(key,state) : 
     	defines unique GotoRule key
     	refers to State state
     	refers to Input key
     	
     Import(name) :
-    	imports 
+    	refers to Module name
+    	imports  
     	State, imported State,
     	Input, imported Input
     	from Module name

@@ -34,9 +34,23 @@ templates
 	>
   	
 	Definition.State =<
-	State <ID> {
-		<StateChange*; separator="\n">
-	}
+		State <ID> {
+			<StateChange*; separator="\n">
+		}
+	>
+	
+	Definition.StartState =<
+		Start State <ID> {
+			<StateChange*; separator="\n">
+		}
+	>
+	
+	Definition.EndState =<
+		End State <ID> {}
+	>
+	
+	Definition.EndState =<
+		End State <ID>
 	>
 	
 	StateChange.StateChange = <on <SINGLEKEY> goto <ID> >
